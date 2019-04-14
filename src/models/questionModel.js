@@ -11,6 +11,9 @@ export const QuestionSchema = new Schema({
         type : String,
         required : 'Enter a description'
     },
+    answer: {
+        type : String
+    },
     created_date: {
         type : Date,
         default : Date.now()

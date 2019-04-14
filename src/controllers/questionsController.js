@@ -41,11 +41,29 @@ export const updateQuestion = (req, res) => {
     })
 };
 
+export const postAnswerToQuestion = (req, res) => {
+    Question.findById({ _id: req.params.questionId}, req.body.answer, { new: true }, (err, question) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(question);
+    })
+};
+
 export const deleteQuestion = (req, res) => {
     Question.remove({ _id: req.params.questionId}, (err) => {
         if (err) {
             res.send(err);
         }
         res.json({message: 'the question has been deleted'});
+    })
+};
+
+export const getQuestionAnswers = (req, res)=>{
+    Question.findById(req.params.questionId,(err, question)=>{
+        if(err){
+            res.send(err);
+        }
+        res.json(question);
     })
 };
