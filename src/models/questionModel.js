@@ -11,9 +11,11 @@ export const QuestionSchema = new Schema({
         type : String,
         required : 'Enter a description'
     },
-    answer: {
-        type : String
-    },
+    answers:[{
+        text: String,
+        vote_count: 0,
+    }
+    ],
     created_date: {
         type : Date,
         default : Date.now()

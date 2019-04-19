@@ -1,10 +1,13 @@
-import {addNewQuestion,
-        getQuestions,
-        getQuestionWithId,
-        updateQuestion,
-        postAnswerToQuestion,
-        getQuestionAnswers,
-        deleteQuestion} from "../controllers/questionsController";
+import {
+    addNewQuestion,
+    getQuestions,
+    getQuestionWithId,
+    updateQuestion,
+    postAnswerToQuestion,
+    getQuestionAnswers,
+    deleteQuestion,
+    updateVoteOnAnswers
+} from "../controllers/questionsController";
 
 const routes = (app) => {
     app.route('/questions')
@@ -24,13 +27,17 @@ const routes = (app) => {
         // PUT edit question
         .put(updateQuestion)
         //Delete question
-        .delete(deleteQuestion)
-        //POST answer
-
+        .delete(deleteQuestion);
 
     app.route('/questions/:questionId/answers')
+        //POST answer
         .post(postAnswerToQuestion)
+        //DELETE answer
         .get(getQuestionAnswers);
+
+    app.route('/questions/:questionId/answers/answerId')
+        //PUT vote
+        .put(updateVoteOnAnswers);
 };
 
 export default routes;

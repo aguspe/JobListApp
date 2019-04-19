@@ -42,7 +42,16 @@ export const updateQuestion = (req, res) => {
 };
 
 export const postAnswerToQuestion = (req, res) => {
-    Question.findById({ _id: req.params.questionId}, req.body.answer, { new: true }, (err, question) => {
+    Question.findOneAndUpdate({_id: req.params.questionId}, {$push:{'answers':{"text":req.body.text}}}, {new: true}, (err,question) => {
+            if (err) {
+                res.send(err);
+            }
+        res.json(question);
+    })
+};
+
+export const updateVoteOnAnswers = (req, res) => {
+    Question.findOneAndUpdate({_id: req.params.questionId, "answers._id": req.params.answerId }, {'$inc': {vote_count: 1}}, {new: true}, (err,question) => {
         if (err) {
             res.send(err);
         }
@@ -64,6 +73,6 @@ export const getQuestionAnswers = (req, res)=>{
         if(err){
             res.send(err);
         }
-        res.json(question);
+        res.json(question.answer.answers);
     })
 };
