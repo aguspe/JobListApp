@@ -19,7 +19,7 @@ export const getQuestions = (req, res)=>{
         if(err){
             res.send(err);
         }
-        res.json(question);
+        res.json({success: true, data: question});
     });
 };
 
@@ -73,6 +73,6 @@ export const getQuestionAnswers = (req, res)=>{
         if(err){
             res.send(err);
         }
-        res.json(question.answer.answers);
+        res.json(question.answers);
     })
 };

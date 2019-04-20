@@ -10,7 +10,7 @@ import {
 } from "../controllers/questionsController";
 
 const routes = (app) => {
-    app.route('/questions')
+    app.route('/api/questions')
         .get((req, res, next)=> {
             //middleware
             console.log(`request from ${req.originalUrl}`);
@@ -21,7 +21,7 @@ const routes = (app) => {
         //POST Endpoint
         .post(addNewQuestion);
 
-    app.route('/questions/:questionId')
+    app.route('/api/questions/:questionId')
         //GET question with id
         .get(getQuestionWithId)
         // PUT edit question
@@ -29,13 +29,13 @@ const routes = (app) => {
         //Delete question
         .delete(deleteQuestion);
 
-    app.route('/questions/:questionId/answers')
+    app.route('/api/questions/:questionId/answers')
         //POST answer
         .post(postAnswerToQuestion)
         //DELETE answer
         .get(getQuestionAnswers);
 
-    app.route('/questions/:questionId/answers/answerId')
+    app.route('/api/questions/:questionId/answers/answerId')
         //PUT vote
         .put(updateVoteOnAnswers);
 };
