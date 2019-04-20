@@ -2,6 +2,7 @@
 // /client/App.js
 import React, { Component } from "react";
 import axios from "axios";
+import Question from "./QuestionsView";
 
 class App extends Component {
     // initialize our state
@@ -101,71 +102,40 @@ class App extends Component {
     // it is easy to understand their functions when you
     // see them render into our screen
     render() {
-        const { data } = this.state;
         return (
-            <div>
-                <ul>
-                    {data.length <= 0
-                        ? "NO DB ENTRIES YET"
-                        : data.map(dat => (
-                            <li style={{ padding: "10px" }} key={data.message}>
-                                <span style={{ color: "gray" }}> title: </span> {dat.title} <br />
-                                <span style={{ color: "gray" }}> description: </span> {dat.description} <br />
-                                {dat.message}
-                            </li>
-                        ))}
-                </ul>
-                <div style={{ padding: "10px" }}>
-                    <input
-                    type="text"
-                    onChange={e => this.setState({ title: e.target.value })}
-                    placeholder="add something in the database"
-                    style={{ width: "200px" }}
-                />
-                    <input
-                        type="text"
-                        onChange={e => this.setState({ description: e.target.value })}
-                        placeholder="add something in the database"
-                        style={{ width: "200px" }}
-                    />
-                    <button onClick={() => this.putDataToDB(this.state.title, this.state.description )}>
-                        ADD
-                    </button>
-                </div>
+            <Question />);
                 {/*<div style={{ padding: "10px" }}>*/}
-                {/*    <input*/}
-                {/*        type="text"*/}
-                {/*        style={{ width: "200px" }}*/}
-                {/*        onChange={e => this.setState({ idToDelete: e.target.value })}*/}
-                {/*        placeholder="put id of item to delete here"*/}
-                {/*    />*/}
-                {/*    <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>*/}
-                {/*        DELETE*/}
-                {/*    </button>*/}
-                {/*</div>*/}
-                {/*<div style={{ padding: "10px" }}>*/}
-                {/*    <input*/}
-                {/*        type="text"*/}
-                {/*        style={{ width: "200px" }}*/}
-                {/*        onChange={e => this.setState({ idToUpdate: e.target.value })}*/}
-                {/*        placeholder="id of item to update here"*/}
-                {/*    />*/}
-                {/*    <input*/}
-                {/*        type="text"*/}
-                {/*        style={{ width: "200px" }}*/}
-                {/*        onChange={e => this.setState({ updateToApply: e.target.value })}*/}
-                {/*        placeholder="put new value of the item here"*/}
-                {/*    />*/}
-                {/*    <button*/}
-                {/*        onClick={() =>*/}
-                {/*            this.updateDB(this.state.idToUpdate, this.state.updateToApply)*/}
-                {/*        }*/}
-                {/*    >*/}
-                {/*        UPDATE*/}
-                {/*    </button>*/}
-                {/*</div>*/}
-            </div>
-        );
+                // {/*    <input*/}
+                // {/*        type="text"*/}
+                // {/*        style={{ width: "200px" }}*/}
+                // {/*        onChange={e => this.setState({ idToDelete: e.target.value })}*/}
+                // {/*        placeholder="put id of item to delete here"*/}
+                // {/*    />*/}
+                // {/*    <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>*/}
+                // {/*        DELETE*/}
+                // {/*    </button>*/}
+                // {/*</div>*/}
+                // {/*<div style={{ padding: "10px" }}>*/}
+                // {/*    <input*/}
+                // {/*        type="text"*/}
+                // {/*        style={{ width: "200px" }}*/}
+                // {/*        onChange={e => this.setState({ idToUpdate: e.target.value })}*/}
+                // {/*        placeholder="id of item to update here"*/}
+                // {/*    />*/}
+                // {/*    <input*/}
+                // {/*        type="text"*/}
+                // {/*        style={{ width: "200px" }}*/}
+                // {/*        onChange={e => this.setState({ updateToApply: e.target.value })}*/}
+                // {/*        placeholder="put new value of the item here"*/}
+                // {/*    />*/}
+                // {/*    <button*/}
+                // {/*        onClick={() =>*/}
+                // {/*            this.updateDB(this.state.idToUpdate, this.state.updateToApply)*/}
+                // {/*        }*/}
+                // {/*    >*/}
+                // {/*        UPDATE*/}
+                // {/*    </button>*/}
+                // {/*</div>*/}
     }
 }
 
