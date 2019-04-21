@@ -3,11 +3,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Question from "./QuestionsView";
+import IndividualQuestion from "./IndividualQuestionView"
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
     // initialize our state
     state = {
         data: [],
+        id:null,
         title: null,
         description: null,
         answers: null,
@@ -62,6 +65,9 @@ class App extends Component {
         });
     };
 
+    getQuestionFromId(id) {
+        return this.state.data.find((elm) => elm.id === Number(id));
+    }
 
     // our delete method that uses our backend api
     // to remove existing database information
@@ -104,7 +110,21 @@ class App extends Component {
     render() {
         return (
             // testing prs
-            <Question data={this.state}/>);
+        <BrowserRouter>
+            <Switch>
+            <Route exact path={'/questions'}
+                   render={(props) =>
+                       <Question {...props}
+                                     data={this.state}/>
+                   }
+            />
+            <Route exact path={'/questions/:id'}
+                   render={(props) => <IndividualQuestion {...props}
+                                                questions={this.getQuestionFromId(props.match.params.id)}/>}
+            />
+            </Switch>
+        </BrowserRouter>)
+
                 {/*<div style={{ padding: "10px" }}>*/}
                 // {/*    <input*/}
                 // {/*        type="text"*/}
