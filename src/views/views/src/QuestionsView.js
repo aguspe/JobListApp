@@ -1,36 +1,9 @@
 import React, {Component} from 'react';
 
 class Question extends Component {
-    state = {
-        data: [],
-        title: null,
-        description: null,
-        answers: null,
-    };
-
-    componentDidMount() {
-        this.getDataFromDb();
-        if (!this.state.intervalIsSet) {
-            let interval = setInterval(this.getDataFromDb, 1000);
-            this.setState({ intervalIsSet: interval });
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.state.intervalIsSet) {
-            clearInterval(this.state.intervalIsSet);
-            this.setState({ intervalIsSet: null });
-        }
-    }
-
-    getDataFromDb = () => {
-        fetch("http://localhost:5000/api/questions")
-            .then(data => data.json())
-            .then(res => this.setState({ data: res.data }));
-    };
 
     render() {
-        const { data } = this.state;
+        const { data } = this.props.data;
         return (
             <div>
                 <ul>

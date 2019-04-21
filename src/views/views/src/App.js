@@ -104,7 +104,7 @@ class App extends Component {
     render() {
         return (
             // testing prs
-            <Question />);
+            <Question data={this.state}/>);
                 {/*<div style={{ padding: "10px" }}>*/}
                 // {/*    <input*/}
                 // {/*        type="text"*/}
