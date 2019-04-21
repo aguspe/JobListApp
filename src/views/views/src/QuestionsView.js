@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+import { Link } from 'react-router-dom';
+import PostQuestionView from "./partials/PostQuestionView";
+
 class Question extends Component {
 
     render() {
@@ -11,29 +14,13 @@ class Question extends Component {
                         ? "NO DB ENTRIES YET"
                         : data.map(dat => (
                             <li style={{ padding: "10px" }} key={data.message}>
-                                <span style={{ color: "gray" }}> title: </span> {dat.title} <br />
-                                <span style={{ color: "gray" }}> description: </span> {dat.description} <br />
+                                <Link to={`/questions/{}`}> <span style={{ color: "gray" }}> title: </span> {dat.title} <br /></Link>
+                                {/*<span style={{ color: "gray" }}> description: </span> {dat.description} <br />*/}
                                 {dat.message}
                             </li>
                         ))}
                 </ul>
-                <div style={{ padding: "10px" }}>
-                    <input
-                        type="text"
-                        onChange={e => this.setState({ title: e.target.value })}
-                        placeholder="add something in the database"
-                        style={{ width: "200px" }}
-                    />
-                    <input
-                        type="text"
-                        onChange={e => this.setState({ description: e.target.value })}
-                        placeholder="add something in the database"
-                        style={{ width: "200px" }}
-                    />
-                    <button onClick={() => this.putDataToDB(this.state.title, this.state.description )}>
-                        ADD
-                    </button>
-                </div>
+                <PostQuestionView />
             </div>
         );
     }
