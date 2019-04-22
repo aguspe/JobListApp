@@ -7,7 +7,7 @@ class Question extends Component {
 
     render() {
         const { data } = this.props.data;
-        console.log(this.props.data)
+        console.log(this.props.data);
         return (
             <div>
                 <ul>
@@ -21,7 +21,11 @@ class Question extends Component {
                             </li>
                         ))}
                 </ul>
-                <PostQuestionView />
+                <PostQuestionView
+                        info={this.props.data}
+                        title={this.props.title}
+                        description = {this.props.description}/>
+            }
             </div>
         );
     }
