@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
+import axios from "axios";
 
 class PostQuestionView extends Component {
 
+    putDataToDB = (title,description) => {
+        console.log('its ne ' + this.props.info.data.map(data => data.id));
+        let currentIds = this.props.info.data.map(data => data.id);
+        let idToBeAdded = 0;
+        while (currentIds.includes(idToBeAdded)) {
+            ++idToBeAdded;
+        }};
     render() {
         return (
                 <div style={{ padding: "10px" }}>
@@ -17,7 +25,7 @@ class PostQuestionView extends Component {
                         placeholder="add something in the database"
                         style={{ width: "200px" }}
                     />
-                    <button onClick={() => this.putDataToDB(this.state.title, this.state.description )}>
+                    <button onClick={() => this.putDataToDB(this.props.title, this.props.description )}>
                         ADD
                     </button>
                 </div>

@@ -28,7 +28,7 @@ export const getQuestionWithId = (req, res)=>{
         if(err){
             res.send(err);
         }
-        res.json(question);
+        res.json({success: true, data: question});
     })
 };
 

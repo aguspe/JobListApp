@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 
 class IndividualQuestion extends Component {
 
     render() {
-        let question = this.props.data;
-        let list = [];
+        let question = this.props.question;
 
-        question.id.forEach((elm) => {
-            list.push(<li>
-                <Link to={`/questions/with/${elm}`}>{elm}</Link>
-            </li>)
-        });
 
         return (
             <div>
                 <h3>{question.title}</h3>
 
                 <p>{question.description}</p>
+
+                <ul>
+                    {question.answers.length <= 0
+                        ? "NO Answers yet"
+                        : question.answers.map(dat => (
+                            <li style={{ padding: "10px" }} key={question.message}>
+                                 <span style={{ color: "gray" }}> </span> {dat.text} <br />
+                                {/*<span style={{ color: "gray" }}> description: </span> {dat.description} <br />*/}
+                                {dat.message}
+                            </li>
+                        ))}
+                </ul>
             </div>
         );
     }

@@ -7,6 +7,7 @@ class Question extends Component {
 
     render() {
         const { data } = this.props.data;
+        console.log(this.props.data);
         return (
             <div>
                 <ul>
@@ -14,13 +15,17 @@ class Question extends Component {
                         ? "NO DB ENTRIES YET"
                         : data.map(dat => (
                             <li style={{ padding: "10px" }} key={data.message}>
-                                <Link to={`/questions/{}`}> <span style={{ color: "gray" }}> title: </span> {dat.title} <br /></Link>
+                                <Link to={`/questions/${dat._id}`}> <span style={{ color: "gray" }}> title: </span> {dat.title} <br /></Link>
                                 {/*<span style={{ color: "gray" }}> description: </span> {dat.description} <br />*/}
                                 {dat.message}
                             </li>
                         ))}
                 </ul>
-                <PostQuestionView />
+                <PostQuestionView
+                        info={this.props.data}
+                        title={this.props.title}
+                        description = {this.props.description}/>
+            }
             </div>
         );
     }
