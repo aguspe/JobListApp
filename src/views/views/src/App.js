@@ -9,8 +9,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 class App extends Component {
     // initialize our state
     state = {
-        data: [],
-        id:null,
+        data: JSON.parse(localStorage.getItem('data')),
         title: null,
         description: null,
         answers: null,
@@ -36,6 +35,10 @@ class App extends Component {
         }
     }
 
+    storage(){
+        let data = this.state.data;
+        localStorage.setItem("data", JSON.stringify(data))
+    };
     // just a note, here, in the front end, we use the id key of our data object
     // in order to identify which we want to Update or delete.
     // for our back end, we use the object id assigned by MongoDB to modify
@@ -47,6 +50,13 @@ class App extends Component {
         fetch("http://localhost:5000/api/questions")
             .then(data => data.json())
             .then(res => this.setState({ data: res.data }));
+        this.storage()
+    };
+
+    getDataFromDbWithId (id) {
+        console.log(this.state.data) ;
+        console.log(id);
+        return this.state.data.find((dat =>dat._id === id))
     };
 
     // our put method that uses our backend api
@@ -64,11 +74,6 @@ class App extends Component {
             description: description
         });
     };
-
-    getQuestionFromId(id) {
-        return this.state.data.find((elm) => elm.id === Number(id));
-    }
-
     // our delete method that uses our backend api
     // to remove existing database information
     // deleteFromDB = idTodelete => {
@@ -120,10 +125,10 @@ class App extends Component {
             />
             <Route exact path={'/questions/:id'}
                    render={(props) => <IndividualQuestion {...props}
-                                                questions={this.getQuestionFromId(props.match.params.id)}/>}
+                                                question={this.getDataFromDbWithId(props.match.params.id)}/>}
             />
             </Switch>
-        </BrowserRouter>)
+        </BrowserRouter>);
 
                 {/*<div style={{ padding: "10px" }}>*/}
                 // {/*    <input*/}

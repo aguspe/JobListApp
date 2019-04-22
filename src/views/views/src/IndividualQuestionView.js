@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 
 class IndividualQuestion extends Component {
 
     render() {
-        let question = this.props.data;
-        let list = [];
+        let question = this.props.question;
 
-        question.id.forEach((elm) => {
-            list.push(<li>
-                <Link to={`/questions/with/${elm}`}>{elm}</Link>
-            </li>)
-        });
 
         return (
             <div>
