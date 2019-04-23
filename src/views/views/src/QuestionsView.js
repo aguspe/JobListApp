@@ -21,11 +21,6 @@ class Question extends Component {
                             </li>
                         ))}
                 </ul>
-                <PostQuestionView
-                        info={this.props.data}
-                        title={this.props.title}
-                        description = {this.props.description}/>
-            }
             </div>
         );
     }

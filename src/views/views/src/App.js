@@ -5,6 +5,8 @@ import axios from "axios";
 import Question from "./QuestionsView";
 import IndividualQuestion from "./IndividualQuestionView"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import PostQuestionView from "./partials/PostQuestionView";
+import PostAnswer from "./partials/PostAnswerView";
 
 class App extends Component {
     // initialize our state
@@ -74,6 +76,19 @@ class App extends Component {
             description: description
         });
     };
+
+    putAnswersToDB = (text) => {
+        let currentIds = this.state.data.answers.map(answers => answers.id);
+        let idToBeAdded = 0;
+        while (currentIds.includes(idToBeAdded)) {
+            ++idToBeAdded;
+        }
+
+        axios.post("/api/questions/:questionId/answers", {
+            id: idToBeAdded,
+            text: text,
+        });
+    };
     // our delete method that uses our backend api
     // to remove existing database information
     // deleteFromDB = idTodelete => {
@@ -118,14 +133,25 @@ class App extends Component {
         <BrowserRouter>
             <Switch>
             <Route exact path={'/questions'}
-                   render={(props) =>
-                       <Question {...props}
-                                     data={this.state}/>
-                   }
+                                 render={(props) =>
+                                     <div>
+                                     <Question {...props}
+                                               data={this.state}
+                                     />
+                                         <PostQuestionView putDataToDB={this.putDataToDB.bind(this)}/>
+                                     </div>
+                                 }
             />
             <Route exact path={'/questions/:id'}
-                   render={(props) => <IndividualQuestion {...props}
-                                                question={this.getDataFromDbWithId(props.match.params.id)}/>}
+                   render={(props) =>
+                       <div>
+                       <IndividualQuestion {...props}
+                                                question={this.getDataFromDbWithId(props.match.params.id)}
+
+                       />
+                       <PostAnswer />
+                       </div>
+                   }
             />
             </Switch>
         </BrowserRouter>);
