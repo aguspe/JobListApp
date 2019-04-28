@@ -6,7 +6,7 @@ import {
     postAnswerToQuestion,
     getQuestionAnswers,
     deleteQuestion,
-    updateVoteOnAnswers
+    updateVoteOnAnswers, getVoteOnAnswers
 } from "../controllers/questionsController";
 
 const routes = (app) => {
@@ -35,9 +35,9 @@ const routes = (app) => {
         //DELETE answer
         .get(getQuestionAnswers);
 
-    app.route('/api/questions/:questionId/answers/answerId')
-        //PUT vote
-        .put(updateVoteOnAnswers);
+    app.route('/api/questions/:questionId/vote')
+    //PUT vote
+        .put(updateVoteOnAnswers)
 };
 
 export default routes;

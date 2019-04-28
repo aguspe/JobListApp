@@ -42,19 +42,10 @@ export const updateQuestion = (req, res) => {
 };
 
 export const postAnswerToQuestion = (req, res) => {
-    Question.findOneAndUpdate({_id: req.params.questionId}, {$push:{'answers':{"text":req.body.text}}}, {new: true}, (err,question) => {
+    Question.findOneAndUpdate({_id: req.params.questionId}, {$push:{'answers':{"text":req.body.text, "votes":0}}}, {new: true}, (err,question) => {
             if (err) {
                 res.send(err);
             }
-        res.json(question);
-    })
-};
-
-export const updateVoteOnAnswers = (req, res) => {
-    Question.findOneAndUpdate({_id: req.params.questionId, "answers._id": req.params.answerId }, {'$inc': {vote_count: 1}}, {new: true}, (err,question) => {
-        if (err) {
-            res.send(err);
-        }
         res.json(question);
     })
 };
@@ -74,5 +65,16 @@ export const getQuestionAnswers = (req, res)=>{
             res.send(err);
         }
         res.json(question.answers);
+    })
+};
+
+export const updateVoteOnAnswers = (req, res) => {
+    let updateVotes = req.body;
+    let addVote = updateVotes.votes+1;
+    Question.findOneAndUpdate({_id: updateVotes.questionId, "answers._id": updateVotes.answerId }, {'$set': {$elemMatch:updateVotes.questionId,"answers.$":[{$elemMatch:updateVotes.answerId, text:updateVotes.text, votes: addVote}]}}, {new: true}, (err,question) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(question);
     })
 };

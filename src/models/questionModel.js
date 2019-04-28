@@ -13,7 +13,7 @@ export const QuestionSchema = new Schema({
     },
     answers:[{
         text: String,
-        vote_count: 0,
+        votes: Number,
     }
     ],
     created_date: {

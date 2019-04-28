@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import { Link } from 'react-router-dom';
-import PostQuestionView from "./partials/PostQuestionView";
 
 class Question extends Component {
 
