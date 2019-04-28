@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 
 class IndividualQuestion extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            votes: 0
+        };
+    }
     render() {
         let question = this.props.question;
 
@@ -18,8 +23,8 @@ class IndividualQuestion extends Component {
                         : question.answers.map(dat => (
                             <li style={{ padding: "10px" }} key={question.message}>
                                  <span style={{ color: "gray" }}> </span> {dat.text} <br />
-                                {/*<span style={{ color: "gray" }}> description: </span> {dat.description} <br />*/}
-                                {dat.message}
+                                 <span style={{ color: "gray" }}> </span> {dat.votes}<br />
+                                    <button className="countUp" onClick={() => this.props.updateVotes(dat.votes, dat._id, question._id, dat.text)}>VOTE</button>
                             </li>
                         ))}
                 </ul>
