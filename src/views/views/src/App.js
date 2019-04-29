@@ -42,7 +42,7 @@ class App extends Component {
     };
 
     getDataFromDb = () => {
-        fetch("http://localhost:5000/api/questions")
+        fetch("/api/questions")
             .then(data => data.json())
             .then(res => this.setState({ data: res.data }));
         this.storage()
@@ -63,7 +63,7 @@ class App extends Component {
             ++idToBeAdded;
         }
 
-        axios.post("http://localhost:5000/api/questions", {
+        axios.post("/api/questions", {
             id: idToBeAdded,
             title: title,
             description: description,
@@ -72,7 +72,7 @@ class App extends Component {
     };
 
     putAnswersToDB(text, id){
-        axios.post("http://localhost:5000/api/questions/"+id+"/answers", {
+        axios.post("/api/questions/"+id+"/answers", {
             text: text,
             headers: new Headers({ "Content-Type": "application/x-www-form-urlencoded" })
         });
@@ -81,7 +81,7 @@ class App extends Component {
     updateVotes(votes, id, questionId, text){
         console.log(votes, id, questionId, text);
         console.log(typeof votes);
-        axios.put('http://localhost:5000/api/questions/'+questionId+'/vote', {
+        axios.put('/api/questions/'+questionId+'/vote', {
             answerId: id,
             votes: parseInt(votes),
             questionId:questionId,
