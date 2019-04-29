@@ -31,11 +31,8 @@ app.use(cors());
 routes(app);
 
 app.use(express.static(__dirname + '/src/views/views/'));
-app.get("*", (req, res) => {
-    let url = path.join(__dirname, '/src/views/views/src', 'index.html');
-    if (!url.startsWith('/app/')) // since we're on local windows
-        url = url.substring(1);
-    res.sendFile(url);
+app.get('/', (req, res) => {
+    res.redirect('http://localhost:3000/');;
 });
 
 app.listen(PORT, ()=>
