@@ -16,7 +16,8 @@
     "eject": "react-scripts eject",
     "postinstall": "react-scripts build"
   },
-  "proxy": "http://localhost:5000/",
+  "homepage": "https://frameworksmandatoryagustin.herokuapp.com/home",
+  "proxy": "https://frameworksmandatoryagustin.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },

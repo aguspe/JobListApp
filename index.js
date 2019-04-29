@@ -31,8 +31,9 @@ app.use(cors());
 routes(app);
 
 app.use(express.static(__dirname + '/src/views/views/'));
-// app.get('/', (req, res) => {
-// });
+app.get('/*', function (req, res) {
+    res.sendFile(__dirname + '/src/views/views/src/index.js','build');
+});
 
 app.listen(PORT, ()=>
     console.log(`server ${PORT}`)
