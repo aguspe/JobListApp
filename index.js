@@ -31,9 +31,8 @@ app.use(cors());
 routes(app);
 
 app.use(express.static(__dirname + '/src/views/views/'));
-app.get('/', (req, res) => {
-    res.redirect('http://localhost:3000/');;
-});
+// app.get('/', (req, res) => {
+// });
 
 app.listen(PORT, ()=>
     console.log(`server ${PORT}`)
