@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const cors = require('cors');
 //mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mandatorydb',{
+mongoose.connect('mongodb://heroku_kj476tpm:hiqbhabd6hp4cagkms0fscqfg2@ds147926.mlab.com:47926/heroku_kj476tpm',{
     useNewUrlParser: true
 });
 
