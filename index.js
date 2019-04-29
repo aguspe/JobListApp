@@ -33,7 +33,7 @@ routes(app);
 
 app.use(express.static(path.join(__dirname, '.src/views/views/build')));
 app.get('/api', function (req, res) {
-    res.sendFile(__dirname + '.src/views/views/build/index.html');
+    res.sendFile(__dirname + '.src/views/views/','build','index.html');
 });
 
 app.listen(PORT, ()=>
