@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header(
         "Access-Control-Allow-Origin",
-        "https://frameworksmandatoryagustin.herokuapp.com"
+        "https://frameworksmandatoryagustin.herokuapp.com/api"
     );
     res.header(
         "Access-Control-Allow-Headers",
@@ -31,7 +31,7 @@ app.use(cors());
 routes(app);
 
 app.use(express.static(__dirname + '/src/views/views/'));
-app.get('/*', function (req, res) {
+app.get('/api', function (req, res) {
     res.sendFile(__dirname + '/src/views/views/src/index.js','build');
 });
 
