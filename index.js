@@ -31,7 +31,7 @@ app.use(cors());
 routes(app);
 
 app.use(express.static(__dirname + '/src/views/views/'));
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/src/views/views/src/index.js');
 });
 
