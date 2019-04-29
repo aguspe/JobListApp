@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./index.js --exec babel-node -e js",
-    "heroku-postbuild": "cd ./src/views/views  && npm install && npm run build && webpack -p"
+    "heroku-postbuild": "cd ./src/views/views  && npm install && npm run build"
   },
   "author": "agustin pequeno",
   "license": "ISC",

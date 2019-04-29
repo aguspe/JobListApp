@@ -30,7 +30,7 @@ app.use(cors());
 
 routes(app);
 
-app.use(express.static(path.join(__dirname, '.src/views/views/build')));;
+app.use(express.static(path.join(__dirname, '.src/views/views/build')));
 app.get('/api', function (req, res) {
     res.sendFile(__dirname + '.src/views/views/build/index.html');
 });
