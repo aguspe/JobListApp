@@ -21,7 +21,7 @@ app.use(cors());
 routes(app);
 
 app.get('/', (req, res) => {
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+    res.sendFile('C:\\Users\\Agustino\\framework_mandatory\\src\\views\\views\\src\\index.js');
 });
 
 app.listen(PORT, ()=>
