@@ -15,12 +15,23 @@ mongoose.connect('mongodb://heroku_kj476tpm:hiqbhabd6hp4cagkms0fscqfg2@ds147926.
 //bodyparser setup
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
-
+app.use((req, res, next) => {
+    res.header(
+        "Access-Control-Allow-Origin",
+        "https://frameworksmandatoryagustin.herokuapp.com"
+    );
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 app.use(cors());
 
 routes(app);
 
-app.get('/', (req, res) => {
+app.use(express.static(__dirname + '/src/views/views/'));
+app.get('*', (req, res) => {
     res.sendFile(__dirname + '/src/views/views/src/index.js');
 });
 
