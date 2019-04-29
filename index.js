@@ -21,7 +21,7 @@ app.use(cors());
 routes(app);
 
 app.get('/', (req, res) => {
-    res.sendFile('C:\\Users\\Agustino\\framework_mandatory\\src\\views\\views\\src\\index.js');
+    res.sendFile(__dirname + '/src/views/views/src/index.js');
 });
 
 app.listen(PORT, ()=>
