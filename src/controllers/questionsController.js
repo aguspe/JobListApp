@@ -43,9 +43,9 @@ export const updateQuestion = (req, res) => {
 
 export const postAnswerToQuestion = (req, res) => {
     Question.findOneAndUpdate({_id: req.params.questionId}, {$push:{'answers':{"text":req.body.text, "votes":0}}}, {new: true}, (err,question) => {
-            if (err) {
-                res.send(err);
-            }
+        if (err) {
+            res.send(err);
+        }
         res.json(question);
     })
 };
