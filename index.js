@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import routes from "./src/routes/questionRoutes";
+import routes from "./src/routes/routes";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 //mongoose connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://heroku_kj476tpm:hiqbhabd6hp4cagkms0fscqfg2@ds147926.mlab.com:47926/heroku_kj476tpm',{
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(cors());
+app.use(cookieParser());
 
 routes(app);
 

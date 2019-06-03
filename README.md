@@ -1,2 +1,3 @@
-# QnApp
-Q &amp; A app build with the mern stack
+# Job list app
+Job list app build for the frameworks exam 
+by Agustin Pequeno

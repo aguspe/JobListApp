@@ -6,12 +6,16 @@ import {
     postAnswerToQuestion,
     getQuestionAnswers,
     deleteQuestion,
-    updateVoteOnAnswers, getVoteOnAnswers
+    updateVoteOnAnswers,
 } from "../controllers/questionsController";
+
+import {
+    addNewUser, authenticateUser, checkToken, withAuth,
+} from "../controllers/userController";
 
 const routes = (app) => {
     app.route('/api/questions')
-        .get((req, res, next)=> {
+        .get( withAuth, (req, res, next)=> {
             //middleware
             console.log(`request from ${req.originalUrl}`);
             console.log(`request type ${req.method}`);
@@ -37,7 +41,20 @@ const routes = (app) => {
 
     app.route('/api/questions/:questionId/vote')
     //PUT vote
-        .put(updateVoteOnAnswers)
+        .put(updateVoteOnAnswers);
+
+// user routes
+
+    app.route('/api/users')
+    //Post user
+        .post(addNewUser);
+
+    app.route('/api/authenticate')
+    //Authenticate
+        .post(authenticateUser);
+
+    app.route('/checkToken')
+        .get(withAuth, checkToken)
 };
 
 export default routes;
