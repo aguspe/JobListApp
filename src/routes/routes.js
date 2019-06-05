@@ -8,7 +8,7 @@ import {
 } from "../controllers/jobController";
 
 import {addNewUser} from "../controllers/userController";
-import {authenticateUser} from "../controllers/authController";
+import {authenticateUser, checkToken, withAuth} from "../controllers/authController";
 
 const routes = (app) => {
     app.route('/api/locations')
@@ -67,8 +67,8 @@ const routes = (app) => {
     //Authenticate
         .post(authenticateUser);
 
-//     app.route('/checkToken')
-//         .get(withAuth, checkToken)
+     app.route('/checkToken')
+        .get(withAuth, checkToken)
 };
 
 export default routes;

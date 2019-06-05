@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import MainJobsView from './Jobs/MainJobsView';
 // import Login from './User/LoginView';
-// import Post from './Jobs/PostJobView';
 import CategoriesView from "./Jobs/CategoriesView";
 import LocationView from "./Jobs/LocationView";
-// import IndividualJobView from "./Jobs/IndividualJobView";
+import IndividualJobView from "./Jobs/IndividualJobView";
+import HomeView from "./General/HomeView";
+import LoginView from "./User/LoginView";
+import PostJobsView from "./Jobs/PostJobsView";
 
 
 class App extends Component{
@@ -57,6 +59,7 @@ class App extends Component{
         );
         const json = await response.json();
         this.setState({ jobs: json });
+        this.jobsStorage();
     }
 
     getCategoriesFromDb = () => {
@@ -78,32 +81,35 @@ class App extends Component{
     //         .then(res => this.setState({ jobs: res.data }));
     //     this.jobsStorage()
     // };
-    // getJobById = (id) => {
-    //     let jobFound = this.state.jobs.find(elm => elm._id === id);
-    //     return jobFound;
-    // };
+    getJobById = (id) => {
+         return this.state.jobs.find(dat => dat._id === id);
+    };
     //
-    // renderJob = (props, id) => {
-    //     let job = this.getJobById(id);
-    //     return <IndividualJobView {...props}
-    //                 job={job}
-    //     />
-    // };
+    findJob = (props, id) => {
+        let job = this.getJobById(id);
+        return <IndividualJobView {...props}
+                    job={job}
+        />
+    };
 
-    // postDataToDB(title, company, description, location, category){
-    //     fetch(`http://localhost:5000/api/jobs/`, {
-    //         method:'post',
-    //         body: JSON.stringify({
-    //             "title": title,
-    //             "company": company,
-    //             "description": description,
-    //             "location": location,
-    //             "category": category
-    //         }),
-    //         headers: new Headers({ "Content-Type": "application/json" }) // add headers
-    //
-    //     })
-    // }
+    makeJob = (title, category, location, description) => {
+        return new Promise((res, rej) => {
+            this.fetch(`/api/jobs`, {
+                method: 'post',
+                body: JSON.stringify({
+                    title: title,
+                    category: category,
+                    location: location,
+                    description: description
+                })
+            })
+                .then(json => {
+                    console.log(json);
+                    res(json);
+                    this.getJobs();
+                })
+        })
+    };
 
     render() {
         return (
@@ -111,6 +117,20 @@ class App extends Component{
                 <Router>
                     <Switch>
                         <Route exact path={'/'}
+                               render={() =>
+                                   <div>
+                                       <HomeView />
+                                   </div>
+                               }
+                        />
+                        <Route exact path={'/login'}
+                               render={() =>
+                                   <div>
+                                       <LoginView />
+                                   </div>
+                               }
+                        />
+                        <Route exact path={'/categories'}
                                render={(props) =>
                                    <div>
                                        <CategoriesView {...props} jobs={this.state.jobs}
@@ -127,31 +147,29 @@ class App extends Component{
                                }
                         />
 
-                        {/*<Route exact path={'/jobs/'}*/}
-                        {/*       render={(props) =>*/}
-                        {/*           <CategoriesView {...props}*/}
-                        {/*                 jobs={this.state.jobs}*/}
-                        {/*                 category={props.match.params.category}*/}
-                        {/*                 areas={this.state.areas}*/}
-                        {/*           />*/}
-                        {/*       }*/}
-                        {/*/>*/}
+                        <Route exact path={'/post'}
+                               render={(props) =>
+                                   <PostJobsView {...props}
+                                                   makeJob={this.makeJob}
+                                   />
+                               }
+                        />
 
                         <Route exact path={'/jobs/:category/:location'}
                                render={(props) =>
                                    <MainJobsView {...props}
                                                  // jobsCL={this.getJobsWithCategoryAndLocation(props.match.params.category, props.match.params.location )}
                                                     jobs={this.state.jobs}
-                                                    category={props.match.params.category}
-                                                    location={props.match.params.location}
+                                                    category={this.state.categories}
+                                                    location={this.state.locations}
                                    />
                                }
                         />
-                        {/*<Route exact path={'/job/:id'}*/}
-                        {/*       render={(props) =>*/}
-                        {/*           this.renderJob(props, props.match.params.id)*/}
-                        {/*       }*/}
-                        {/*/>*/}
+                        <Route exact path={'/job/:id'}
+                               render={(props) =>
+                                   this.findJob(props, props.match.params.id)
+                               }
+                        />
                         {/*<Route exact path='/login' component={Login}/>*/}
                         {/*<Route exact path='/post' component={Post}/>*/}
                         {/*<Route exact path={'/post'}*/}

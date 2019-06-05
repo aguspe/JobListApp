@@ -23,7 +23,8 @@ class LocationView extends Component{
 
         return(
             <div>
-                <Link to ={"/login"}> <p>Login</p></Link>
+                <Link to ={"/"}> <p>Go back Home</p></Link>
+                <Link to ={"/categories"}> <p>Go back to categories</p></Link>
                 <h1>Locations</h1>
                 {locations.map(dat => {
                     return <Link key={dat._id} to={`/jobs/${this.props.category}/${dat.namePath}`}>
