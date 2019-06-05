@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import MainJobsView from './Jobs/MainJobsView';
-// import Login from './User/LoginView';
 import CategoriesView from "./Jobs/CategoriesView";
 import LocationView from "./Jobs/LocationView";
 import IndividualJobView from "./Jobs/IndividualJobView";
@@ -19,8 +18,6 @@ class App extends Component{
             jobs: [],
             locations: []
         };
-
-        // this.postDataToDB = this.postDataToDB.bind(this);
     }
 
     categoryStorage(){
@@ -39,19 +36,10 @@ class App extends Component{
     };
 
     componentDidMount() {
-        //await data.
         this.getJobsFromDb();
         this.getCategoriesFromDb();
         this.getLocationsFromDb();
     }
-    // never let a process live forever
-    // always kill a process every time we are done using it
-    // componentWillUnmount() {
-    //     if (this.state.intervalIsSet) {
-    //         clearInterval(this.state.intervalIsSet);
-    //         this.setState({ intervalIsSet: null });
-    //     }
-    // }
 
     async getJobsFromDb () {
         const response = await fetch(
@@ -75,12 +63,6 @@ class App extends Component{
         this.locationStorage()
     };
 
-    // getJobsWithCategoryAndLocation = (category, location) => {
-    //     fetch("http://localhost:5000app.route/api/"+category+"/"+location)
-    //         .then(jobs => jobs.json())
-    //         .then(res => this.setState({ jobs: res.data }));
-    //     this.jobsStorage()
-    // };
     getJobById = (id) => {
          return this.state.jobs.find(dat => dat._id === id);
     };
@@ -93,8 +75,7 @@ class App extends Component{
     };
 
     makeJob = (title, category, location, description) => {
-        return new Promise((res, rej) => {
-            this.fetch(`/api/jobs`, {
+            fetch(`http://localhost:5000/api/jobs/`, {
                 method: 'post',
                 body: JSON.stringify({
                     title: title,
@@ -105,10 +86,8 @@ class App extends Component{
             })
                 .then(json => {
                     console.log(json);
-                    res(json);
-                    this.getJobs();
+                    this.getJobsFromDb();
                 })
-        })
     };
 
     render() {
@@ -151,6 +130,8 @@ class App extends Component{
                                render={(props) =>
                                    <PostJobsView {...props}
                                                    makeJob={this.makeJob}
+                                                   categories={this.state.categories}
+                                                   locations={this.state.locations}
                                    />
                                }
                         />
@@ -158,7 +139,6 @@ class App extends Component{
                         <Route exact path={'/jobs/:category/:location'}
                                render={(props) =>
                                    <MainJobsView {...props}
-                                                 // jobsCL={this.getJobsWithCategoryAndLocation(props.match.params.category, props.match.params.location )}
                                                     jobs={this.state.jobs}
                                                     category={this.state.categories}
                                                     location={this.state.locations}
@@ -170,15 +150,6 @@ class App extends Component{
                                    this.findJob(props, props.match.params.id)
                                }
                         />
-                        {/*<Route exact path='/login' component={Login}/>*/}
-                        {/*<Route exact path='/post' component={Post}/>*/}
-                        {/*<Route exact path={'/post'}*/}
-                        {/*       render={(props) =>*/}
-                        {/*           <Post {...props}*/}
-                        {/*                 header={'Post job add'} postDataToDB={this.postDataToDB} form={this.postDataToDB}/>*/}
-                        {/*       }*/}
-                        {/*/>*/}
-
                     </Switch>
                 </Router>
             </div>

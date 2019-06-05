@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import Style from '../css/style.css'
 import formObject from '../General/makeObject';
+import {Link} from "react-router-dom";
 
-export class AddJob extends Component {
+export class PostJobsView extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
@@ -11,6 +13,7 @@ export class AddJob extends Component {
             job.title,
             job.category,
             job.location,
+            job.company,
             job.description,
         )
     };
@@ -26,20 +29,23 @@ export class AddJob extends Component {
         let locations = this.props.locations;
 
         if(!categories || !locations){
-            return <p>Loading categories and areas</p>
+            return <p>Waiting for the categories and locations</p>
         }
 
         return (
             <div>
+                <Link to ={"/"}> <p>Go back Home</p></Link><br></br>
+                <Link to ={"/"}> <p>Go to see the jobs</p></Link><br></br>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="title" placeholder="Add a title" required/>
+                    <input type="text" name="title" placeholder="Add a title" required/><br></br>
+                    <input type="text" name="company" placeholder="Add a company" required/><br></br>
+                    <textarea type="text" name="description" placeholder="Add a description" required/><br></br>
                     <select name="location" required>
                         {this.renderDatList(locations)}
                     </select>
                     <select name="category" required>
                         {this.renderDatList(categories)}
                     </select>
-                    <textarea type="text" name="description" placeholder="Add a description" required/>
                     <button type="submit">Add a job post</button>
                 </form>
             </div>
@@ -47,4 +53,4 @@ export class AddJob extends Component {
     }
 }
 
-export default AddJob
+export default PostJobsView
