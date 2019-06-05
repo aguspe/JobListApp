@@ -3,9 +3,8 @@ import {
     getCategories,
     addNewCategory,
     getJobs,
-    getCategoryJobs,
     getLocations,
-    addNewLocation, getLocationAndCategoryJobs, getLocationJobs
+    addNewLocation, getLocationAndCategoryJobs, getLocationJobs, getJobById
 } from "../controllers/jobController";
 
 import {addNewUser} from "../controllers/userController";
@@ -24,13 +23,7 @@ const routes = (app) => {
         .post(addNewLocation);
 
     app.route('/api/categories')
-        .get((req, res, next)=> {
-            //middleware
-            console.log(`request from ${req.originalUrl}`);
-            console.log(`request type ${req.method}`);
-            next();
-        }, getCategories)
-
+        .get(getCategories)
         //POST Endpoint
         .post(addNewCategory);
 
@@ -38,6 +31,10 @@ const routes = (app) => {
         //POST Job
         .post(addNewJob)
         .get(getJobs);
+
+    // app.route('/api/:location/:category')
+    // //POST Job
+    //     .get(getJobById);
 
     // app.route('/api/:location')
     // //Get Jobs in a location

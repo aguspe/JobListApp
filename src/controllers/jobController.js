@@ -61,6 +61,15 @@ export const getJobs = (req, res)=>{
             .catch(err => res.send(err))
 };
 
+// export const getJobById = (req, res)=>{
+//     Job.findById({location: req.params.location, category: req.params.category},(err, job)=>{
+//         if(err){
+//             res.send(err);
+//         }
+//         res.json({success: true, data: job});
+//     })
+// };
+
 export const getLocationAndCategoryJobs = (req, res)=>{
     Job.find({location: req.params.location, category: req.params.category},(err, job)=>{
         if(err){
