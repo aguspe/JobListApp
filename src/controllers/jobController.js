@@ -1,5 +1,4 @@
 import {Job, Category, Location} from "../models/jobModel";
-const mongoose = require('mongoose');
 
 export const addNewLocation = (req, res)=> {
     let newLocation = new Location(req.body);
