@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 });
 app.use(cors());
 app.use(cookieParser());
-
 routes(app);
 
 app.use(express.static(path.join(__dirname, '/src/views/views/build')));
