@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-// import MainJobsView from './Jobs/MainJobsView';
+import MainJobsView from './Jobs/MainJobsView';
 // import Login from './User/LoginView';
 // import Post from './Jobs/PostJobView';
 import CategoriesView from "./Jobs/CategoriesView";
-// import LocationView from "./Jobs/LocationView";
+import LocationView from "./Jobs/LocationView";
 // import IndividualJobView from "./Jobs/IndividualJobView";
 
 
@@ -13,24 +13,37 @@ class App extends Component{
         super(props);
 
         this.state = {
-            data: [],
+            categories: [],
+            jobs: [],
+            locations: []
         };
 
         // this.postDataToDB = this.postDataToDB.bind(this);
     }
 
-    storage(){
-        let data = this.state.data;
-        localStorage.setItem("data", JSON.stringify(data))
+    categoryStorage(){
+        let categories = this.state.categories;
+        localStorage.setItem("categories", JSON.stringify(categories))
     };
+
+    jobsStorage(){
+        let jobs = this.state.jobs;
+        localStorage.setItem("jobs", JSON.stringify(jobs))
+    };
+
+    locationStorage(){
+        let locations = this.state.locations;
+        localStorage.setItem("locations", JSON.stringify(locations))
+    };
+
     componentDidMount() {
         //await data.
-        // this.getJobs();
+        this.getJobsFromDb();
         this.getCategoriesFromDb();
-        // this.getLocations();
+        this.getLocationsFromDb();
     }
     // never let a process live forever
-    // always kill a process everytime we are done using it
+    // always kill a process every time we are done using it
     // componentWillUnmount() {
     //     if (this.state.intervalIsSet) {
     //         clearInterval(this.state.intervalIsSet);
@@ -38,28 +51,33 @@ class App extends Component{
     //     }
     // }
 
-    // async getJobs () {
-    //     const response = await fetch(
-    //         `http://localhost:5000/api/jobs`
-    //     );
-    //     const json = await response.json();
-    //     this.setState({ jobs: json });
-    // }
+    async getJobsFromDb () {
+        const response = await fetch(
+            `http://localhost:5000/api/jobs`
+        );
+        const json = await response.json();
+        this.setState({ jobs: json });
+    }
 
     getCategoriesFromDb = () => {
         fetch("http://localhost:5000/api/categories")
-            .then(data => data.json())
-            .then(res => this.setState({ data: res.data }));
-        this.storage()
+            .then(categories => categories.json())
+            .then(res => this.setState({ categories: res.data }));
+        this.categoryStorage()
     };
-    // async getLocations (){
-    //     const response = await fetch(`http://localhost:5000/api/locations`);
-    //     console.log(response);
-    //     const json = await response.json();
-    //     this.setState({locations:json});
-    //
-    // }
+    getLocationsFromDb = () => {
+        fetch("http://localhost:5000/api/locations")
+            .then(locations => locations.json())
+            .then(res => this.setState({ locations: res.data }));
+        this.locationStorage()
+    };
 
+    // getJobsWithCategoryAndLocation = (category, location) => {
+    //     fetch("http://localhost:5000app.route/api/"+category+"/"+location)
+    //         .then(jobs => jobs.json())
+    //         .then(res => this.setState({ jobs: res.data }));
+    //     this.jobsStorage()
+    // };
     // getJobById = (id) => {
     //     let jobFound = this.state.jobs.find(elm => elm._id === id);
     //     return jobFound;
@@ -95,17 +113,19 @@ class App extends Component{
                         <Route exact path={'/'}
                                render={(props) =>
                                    <div>
-                                       <CategoriesView {...props} categories={this.state.data}/>
+                                       <CategoriesView {...props} jobs={this.state.jobs}
+                                                       categories={this.state.categories}/>
                                    </div>
                                }
                         />
-                        {/*<Route exact path={'/'}*/}
-                        {/*       render={(props) =>*/}
-                        {/*           <LocationView {...props}*/}
-                        {/*                         jobs={this.state.jobs}*/}
-                        {/*                         locations={this.state.locations}/>*/}
-                        {/*       }*/}
-                        {/*/>*/}
+                        <Route exact path={'/jobs/:category'}
+                               render={(props) =>
+                                   <LocationView {...props}
+                                                 jobs={this.state.jobs}
+                                                 category={props.match.params.category}
+                                                 locations={this.state.locations}/>
+                               }
+                        />
 
                         {/*<Route exact path={'/jobs/'}*/}
                         {/*       render={(props) =>*/}
@@ -117,15 +137,16 @@ class App extends Component{
                         {/*       }*/}
                         {/*/>*/}
 
-                        {/*<Route exact path={'/jobs/:category/:location'}*/}
-                        {/*       render={(props) =>*/}
-                        {/*           <MainJobsView {...props}*/}
-                        {/*                    jobs={this.state.jobs}*/}
-                        {/*                    category={props.match.params.category}*/}
-                        {/*                    area={props.match.params.locations}*/}
-                        {/*           />*/}
-                        {/*       }*/}
-                        {/*/>*/}
+                        <Route exact path={'/jobs/:category/:location'}
+                               render={(props) =>
+                                   <MainJobsView {...props}
+                                                 // jobsCL={this.getJobsWithCategoryAndLocation(props.match.params.category, props.match.params.location )}
+                                                    jobs={this.state.jobs}
+                                                    category={props.match.params.category}
+                                                    location={props.match.params.location}
+                                   />
+                               }
+                        />
                         {/*<Route exact path={'/job/:id'}*/}
                         {/*       render={(props) =>*/}
                         {/*           this.renderJob(props, props.match.params.id)*/}

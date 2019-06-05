@@ -1,27 +1,38 @@
-// import React, {Component} from 'react';
-// import {Link} from "react-router-dom";
-//
-// class LocationView extends Component{
-//
-//     render() {
-//         return(
-//             <div>
-//                 <Link to ={"/login"}> <p>Login</p></Link>
-//                 <Link to ={"/post"}><p>Post</p></Link>
-//                 <h1>Job index</h1>
-//                 <h3>List of jobs</h3>
-//                 {this.props.jobs.map(el => {
-//                     return <Link key={el._id} to={"/job/" + el._id}><p>Title: {el.title},<br></br>
-//                         Description: {el.description},<br></br>
-//                     </p></Link>
-//                 })}
-//                 <h3>List of locations</h3>
-//                 {this.props.locations.map(el => {
-//                     return <Link key={el._id} to={"/job/" + el._id}><p>Location: {el.name},<br></br>
-//                     </p></Link>
-//                 })}
-//             </div>
-//         )
-//     }
-// }
-// export default LocationView;
+import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+
+class LocationView extends Component{
+
+    filtering = (list, factor) => {
+        return list.filter(dat => dat.location.namePath === factor)
+    };
+
+    render() {
+
+        let locations = this.props.locations;
+        // let jobs = this.props.jobs;
+
+        if(locations <= 0){
+            return  <p>Waiting for locations</p>
+        }
+        // let jobsFilter = jobs.filter(job => job.category.namePath === this.props.category);
+
+        // if(jobsFilter.length <= 0){
+        //     return <p>Sorry there are no jobs</p>
+        // }
+
+        return(
+            <div>
+                <Link to ={"/login"}> <p>Login</p></Link>
+                <h1>Locations</h1>
+                {locations.map(dat => {
+                    return <Link key={dat._id} to={`/jobs/${this.props.category}/${dat.namePath}`}>
+                        <p>{dat.locationName}
+                    {/*({this.filtering(this.filtering, dat.namePath).length})<br></br>*/}
+                    </p></Link>
+                })}
+            </div>
+        )
+    }
+}
+export default LocationView;

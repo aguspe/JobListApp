@@ -27,10 +27,21 @@ const routes = (app) => {
         //POST Endpoint
         .post(addNewCategory);
 
-        app.route('/api/jobs')
-        //POST Job
-        .post(addNewJob)
-        .get(getJobs);
+    app.route('/api/jobs')
+        .get((req, res, next)=> {
+            //middleware
+            console.log(`request from ${req.originalUrl}`);
+            console.log(`request type ${req.method}`);
+            next();
+        }, getJobs)
+        .post(addNewJob);
+
+    // app.route('/api/jobs')
+    //     //POST Job
+    //     .get(getJobs)
+    //     //POST Job
+    //     .post(addNewJob);
+
 
     // app.route('/api/:location/:category')
     // //POST Job
@@ -44,7 +55,7 @@ const routes = (app) => {
     // //Get Jobs in a category
     //     .get(getCategoryJobs);
 
-    app.route('/api/:location/:category')
+    app.route('/api/:category/:location')
     //Get Jobs in location and category
         .get(getLocationAndCategoryJobs);
 

@@ -70,7 +70,7 @@ export const getJobs = (req, res)=>{
 // };
 
 export const getLocationAndCategoryJobs = (req, res)=>{
-    Job.find({location: req.params.location, category: req.params.category},(err, job)=>{
+    Job.find({category: req.params.category, location: req.params.location},(err, job)=>{
         if(err){
             res.send(err);
         }

@@ -10,11 +10,13 @@ const JobSchema = new Schema({
 });
 
 const LocationSchema = new Schema({
-    location: {type:String}
+    locationName: {type:String},
+    namePath : {type:String}
 });
 
 const CategorySchema = new Schema({
-    category: {type:String}
+    categoryName: {type:String},
+    namePath : {type:String}
 });
 
 export const Job = mongoose.model('Job', JobSchema);
