@@ -2,7 +2,6 @@ import React from 'react'
 import LoginView from "../User/LoginView";
 import {cleanup, render,  fireEvent} from "@testing-library/react";
 import {BrowserRouter} from "react-router-dom";
-import HomeView from "../General/HomeView";
 
 describe('Check for text in header', () => {
     it('should contain the proper text', () => {
