@@ -53,7 +53,7 @@ export const addNewJob = (req, res)=> {
 
 export const getJobs = (req, res)=>{
         Job.find({})
-        .populate('Category')
+        .populate('category')
         .populate('location')
         .exec()
             .then(job =>res.json(job))

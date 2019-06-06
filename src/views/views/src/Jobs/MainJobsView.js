@@ -11,9 +11,10 @@ class MainJobsView extends Component{
         if(jobs <= 0){
             return  <p>Waiting for jobs</p>
         }
-        // let jobsFilter = jobs.filter(job => job.category.namePath === this.props.categories && job.location.namePath === this.props.locations);
-
-        if(jobs.length <= 0){
+        let jobsFilter = jobs.filter(job => job.category.namePath === this.props.category);
+console.log(this.props.location);
+        console.log(this.props.category);
+        if(jobsFilter.length <= 0){
             return <p>Sorry there are no jobs</p>
         }
 
@@ -22,7 +23,7 @@ class MainJobsView extends Component{
                 <Link to ={"/"}> <p>Go back to home</p></Link>
                 <h1>Jobs</h1>
                 <h3>List of jobs</h3>
-                {jobs.map(dat => {
+                {jobsFilter.map(dat => {
                     return <Link to={`/job/${dat._id}`}>
                         <p>{dat.title}</p>
                     </Link>

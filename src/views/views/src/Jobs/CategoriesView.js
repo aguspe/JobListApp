@@ -3,14 +3,9 @@ import {Link} from "react-router-dom";
 
 class CategoriesView extends Component{
 
-    // filtering = (list, factor) => {
-    //     return list.filter(dat => dat.namePath === factor)
-    // };
-
     render() {
 
         let categories = this.props.categories;
-        // let jobs = this.props.jobs;
 
         if(categories <= 0){
             return  <p>Categories loading...</p>

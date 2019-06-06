@@ -144,8 +144,8 @@ class App extends Component{
                                render={(props) =>
                                    <MainJobsView {...props}
                                                     jobs={this.state.jobs}
-                                                    category={this.state.categories}
-                                                    location={this.state.locations}
+                                                    category={props.match.params.category}
+                                                    locations={props.match.params.location}
                                    />
                                }
                         />
