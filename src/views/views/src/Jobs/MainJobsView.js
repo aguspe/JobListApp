@@ -5,13 +5,10 @@ class MainJobsView extends Component{
     render() {
 
         let jobs = this.props.jobs;
-        // let categories = this.props.categories;
-        // let locations = this.props.locations;
-
         if(jobs <= 0){
             return  <p>Waiting for jobs</p>
         }
-        let jobsFilter = jobs.filter(job => job.category.namePath === this.props.category);
+        let jobsFilter = jobs.filter(job => job.category.namePath === this.props.category && job.location.namePath === this.props.location);
 console.log(this.props.location);
         console.log(this.props.category);
         if(jobsFilter.length <= 0){
