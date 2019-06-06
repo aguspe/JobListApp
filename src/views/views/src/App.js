@@ -100,9 +100,10 @@ class App extends Component{
                 <Router>
                     <Switch>
                         <Route exact path={'/'}
-                               render={() =>
+                               render={(props) =>
                                    <div>
-                                       <HomeView />
+                                       <HomeView {...props}
+                                       />
                                    </div>
                                }
                         />
