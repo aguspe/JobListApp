@@ -21,7 +21,7 @@ class CategoriesView extends Component{
                 <Link to ={"/"}> <p>Go back Home</p></Link>
                 <h1>Categories</h1>
                 {categories.map(dat => {
-                    return <Link key={dat._id} to={`/jobs/${dat.namePath}`}><p>{dat.categoryName} <br></br>
+                    return <Link key={dat._id} to={`/jobs/${dat.namePath}`}><p>{dat.name} <br></br>
                     </p></Link>
                 })}
             </div>

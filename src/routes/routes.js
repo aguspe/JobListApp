@@ -4,7 +4,7 @@ import {
     addNewCategory,
     getJobs,
     getLocations,
-    addNewLocation, getLocationAndCategoryJobs, getLocationJobs, getJobById
+    addNewLocation, getLocationAndCategoryJobs,
 } from "../controllers/jobController";
 
 import {addNewUser} from "../controllers/userController";
@@ -34,26 +34,7 @@ const routes = (app) => {
             console.log(`request type ${req.method}`);
             next();
         }, getJobs)
-        .post(addNewJob);
-
-    // app.route('/api/jobs')
-    //     //POST Job
-    //     .get(getJobs)
-    //     //POST Job
-    //     .post(addNewJob);
-
-
-    // app.route('/api/:location/:category')
-    // //POST Job
-    //     .get(getJobById);
-
-    // app.route('/api/:location')
-    // //Get Jobs in a location
-    //     .get(getLocationJobs);
-
-    // app.route('/api/:category')
-    // //Get Jobs in a category
-    //     .get(getCategoryJobs);
+        .post(withAuth,addNewJob);
 
     app.route('/api/:category/:location')
     //Get Jobs in location and category

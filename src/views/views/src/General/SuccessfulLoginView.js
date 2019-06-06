@@ -8,6 +8,7 @@ class SuccessfulLoginView extends Component {
         return (
             <div>
                 <Link to={`/post/`}>Now you can post companies, click here</Link><br></br>
+                <Link to ={"/"}> <p>Go back Home</p></Link>
             </div>
         );
     }

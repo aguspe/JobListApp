@@ -10,12 +10,12 @@ const JobSchema = new Schema({
 });
 
 const LocationSchema = new Schema({
-    locationName: {type:String},
+    name: {type:String},
     namePath : {type:String}
 });
 
 const CategorySchema = new Schema({
-    categoryName: {type:String},
+    name: {type:String},
     namePath : {type:String}
 });
 

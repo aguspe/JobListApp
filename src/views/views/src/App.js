@@ -107,9 +107,9 @@ class App extends Component{
                                }
                         />
                         <Route exact path={'/login'}
-                               render={() =>
+                               render={(props) =>
                                    <div>
-                                       <LoginView />
+                                       <LoginView {...props}/>
                                    </div>
                                }
                         />

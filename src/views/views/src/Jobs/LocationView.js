@@ -28,7 +28,7 @@ class LocationView extends Component{
                 <h1>Locations</h1>
                 {locations.map(dat => {
                     return <Link key={dat._id} to={`/jobs/${this.props.category}/${dat.namePath}`}>
-                        <p>{dat.locationName}
+                        <p>{dat.name}
                     {/*({this.filtering(this.filtering, dat.namePath).length})<br></br>*/}
                     </p></Link>
                 })}

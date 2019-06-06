@@ -1,5 +1,6 @@
 // Login.jsx
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +17,7 @@ export default class Login extends Component {
     };
     onSubmit = (event) => {
         event.preventDefault();
-        fetch('/api/authenticate', {
+        fetch('http://localhost:5000/api/authenticate', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -38,6 +39,8 @@ export default class Login extends Component {
     };
     render() {
         return (
+            <div>
+                <Link to ={"/"}> <p>Go back Home</p></Link>
             <form onSubmit={this.onSubmit}>
                 <h1>Login Below!</h1>
                 <input
@@ -58,6 +61,7 @@ export default class Login extends Component {
                 />
                 <input type="submit" value="Submit"/>
             </form>
+            </div>
         );
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import formObject from '../General/makeObject';
 import Style from '../css/style.css'
+import {Link} from "react-router-dom";
 
 export class PostJobsView extends Component {
     handleSubmit = (e) => {
@@ -33,6 +34,7 @@ export class PostJobsView extends Component {
 
         return (
             <div>
+                <Link to ={"/"}> <p>Go back Home</p></Link><br></br>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="title" placeholder="Add a title" required/><br></br>
                     <textarea type="text" name="description" placeholder="Add a description" required/><br></br>
