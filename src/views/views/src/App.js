@@ -45,7 +45,7 @@ class App extends Component{
 
     async getJobsFromDb () {
         const response = await fetch(
-            `http://localhost:5000/api/jobs`
+            `/api/jobs`
         );
         const json = await response.json();
         this.setState({ jobs: json });
@@ -53,13 +53,13 @@ class App extends Component{
     }
 
     getCategoriesFromDb = () => {
-        fetch("http://localhost:5000/api/categories")
+        fetch("/api/categories")
             .then(categories => categories.json())
             .then(res => this.setState({ categories: res.data }));
         this.categoryStorage()
     };
     getLocationsFromDb = () => {
-        fetch("http://localhost:5000/api/locations")
+        fetch("/api/locations")
             .then(locations => locations.json())
             .then(res => this.setState({ locations: res.data }));
         this.locationStorage()
@@ -77,7 +77,7 @@ class App extends Component{
     };
 
     makeJob = (title, category, company, location, description) => {
-            fetch(`http://localhost:5000/api/jobs/`, {
+            fetch(`/api/jobs/`, {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

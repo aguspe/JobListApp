@@ -10,13 +10,14 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node ./bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "react-scripts build"
   },
-  "homepage": "http://localhost:3000",
+  "homepage": "https://frameworksexamagustin.herokuapp.com/",
+  "proxy": "https://frameworksexamagustin.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
