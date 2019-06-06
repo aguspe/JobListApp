@@ -8,7 +8,8 @@ class HomeView extends Component {
         return (
             <div>
                 <Link to={`/categories/`}>Search for a job!</Link><br></br>
-                <Link to={`/post/`}>Are you a company? Post a job!</Link>
+                <Link to={`/succesfulLogin/`}>Are you a company? Post a job!</Link><br></br>
+                <Link to={`/login/`}>Login as a company before posting</Link>
             </div>
         );
     }

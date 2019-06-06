@@ -1,65 +1,63 @@
-import React, {Component} from 'react';
-
-class LoginView extends Component{
-    constructor(props){
+// Login.jsx
+import React, { Component } from 'react';
+export default class Login extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            userName: '',
+            email : '',
             password: ''
         };
     }
     handleInputChange = (event) => {
-        const {value, name} = event.target;
+        const { value, name } = event.target;
         this.setState({
             [name]: value
         });
     };
-    onSubmit = event => {
+    onSubmit = (event) => {
         event.preventDefault();
-        fetch('http://localhost:5000/api/authenticate', {
+        fetch('/api/authenticate', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => {
-            if (res.status === 200) {
-                console.log('hello world');
-                this.props.history.push('/');
-
-            }else{
-                const error = new Error(res.error);
-                throw error
-            }
-        }).catch(err => {
-            console.error(err);
         })
+            .then(res => {
+                if (res.status === 200) {
+                    this.props.history.push('/succesfulLogin');
+                } else {
+                    const error = new Error(res.error);
+                    throw error;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error logging in please try again');
+            });
     };
     render() {
-        return(
+        return (
             <form onSubmit={this.onSubmit}>
-                <h1>Login for posting jobs</h1>
-                <div>
-                    <input
-                        type="name"
-                        name="userName"
-                        // value={this.state.userName}
-                        onChange={this.handleInputChange}
-                        placeholder="Username"
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                        placeholder="password "
-                        required
-                    />
-                </div>
-                <input type="submit" value="submit"/>
+                <h1>Login Below!</h1>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter password"
+                    value={this.state.password}
+                    onChange={this.handleInputChange}
+                    required
+                />
+                <input type="submit" value="Submit"/>
             </form>
-        )
+        );
     }
 }
-export default LoginView;

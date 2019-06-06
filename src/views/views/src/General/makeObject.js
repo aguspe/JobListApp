@@ -1,12 +1,12 @@
-function createObject(e){
+function makeObject(e){
     const object = {};
-    e.target.childNodes.forEach((dat) => {
-        if(dat.value){
-            object[dat.name] = dat.value
+    e.target.childNodes.forEach((elm) => {
+        if(elm.value){
+            object[elm.name] = elm.value
         }
-        dat.value = null
+        elm.value = null
     });
     return object;
 }
 
-module.exports = {createObject};
+module.exports = {makeObject};

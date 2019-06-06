@@ -7,6 +7,8 @@ import IndividualJobView from "./Jobs/IndividualJobView";
 import HomeView from "./General/HomeView";
 import LoginView from "./User/LoginView";
 import PostJobsView from "./Jobs/PostJobsView";
+import withAuth from './General/withAuth';
+import SuccessfulLoginView from "./General/SuccessfulLoginView";
 
 
 class App extends Component{
@@ -74,12 +76,14 @@ class App extends Component{
         />
     };
 
-    makeJob = (title, category, location, description) => {
+    makeJob = (title, category, company, location, description) => {
             fetch(`http://localhost:5000/api/jobs/`, {
                 method: 'post',
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     title: title,
                     category: category,
+                    company: company,
                     location: location,
                     description: description
                 })
@@ -125,7 +129,7 @@ class App extends Component{
                                                  locations={this.state.locations}/>
                                }
                         />
-
+                        <Route path="/succesfulLogin" component={withAuth(SuccessfulLoginView)} />
                         <Route exact path={'/post'}
                                render={(props) =>
                                    <PostJobsView {...props}
@@ -150,6 +154,7 @@ class App extends Component{
                                    this.findJob(props, props.match.params.id)
                                }
                         />
+                        <Route exact path={'/login'}/>
                     </Switch>
                 </Router>
             </div>

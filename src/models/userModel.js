@@ -38,4 +38,4 @@ UserSchema.methods.isCorrectPassword = function(password, callback){
             callback(err, same);
         }
     });
-}
+};

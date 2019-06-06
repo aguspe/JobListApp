@@ -11,7 +11,7 @@ class MainJobsView extends Component{
         if(jobs <= 0){
             return  <p>Waiting for jobs</p>
         }
-        // let jobsFilter = jobs.filter(job => job.category === this.props.categories._id && job.location === this.props.locations._id);
+        // let jobsFilter = jobs.filter(job => job.category.namePath === this.props.categories && job.location.namePath === this.props.locations);
 
         if(jobs.length <= 0){
             return <p>Sorry there are no jobs</p>
